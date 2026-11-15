@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Convert PDF pages into high-quality JPG images online. Choose pages, resolution and image quality.">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>PDF to JPG Converter | Convert PDF Pages to Images</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="PixelPress home">
+      <span class="brand-mark"><span></span><span></span><span></span><span></span></span>
+      <span>pixel<span class="brand-light">press</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#how-it-works">How it works</a>
+      <a href="#features">Features</a>
+    </nav>
+    <a class="top-cta" href="#converter">Convert PDF <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> SIMPLE. FAST. PRIVATE.</div>
+        <h1>Every page.<br><span>Picture perfect.</span></h1>
+        <p class="hero-description">Turn your PDF pages into crisp, high-quality JPG images in just a few clicks. No complicated software needed.</p>
+        <div class="hero-points">
+          <span><i>✓</i> High-quality output</span>
+          <span><i>✓</i> Choose specific pages</span>
+          <span><i>✓</i> ZIP download</span>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-glow"></div>
+        <div class="art-card art-back"><div class="art-lines"></div><div class="art-lines short"></div><div class="art-photo"></div></div>
+        <div class="art-card art-front">
+          <div class="pdf-symbol"><span>PDF</span></div>
+          <div class="art-file-lines"><b></b><i></i><i></i></div>
+          <div class="convert-arrow">↗</div>
+        </div>
+        <div class="art-image"><div class="sun"></div><div class="mountain one"></div><div class="mountain two"></div></div>
+        <div class="floating-tag"><span class="tag-check">✓</span> JPG ready</div>
+      </div>
+    </section>
+
+    <section class="converter-wrap" id="converter">
+      <div class="section-heading">
+        <div><span class="section-kicker">YOUR CONVERTER</span><h2>Convert PDF to JPG</h2></div>
+        <div class="secure-note"><span>♧</span> Files are processed in memory</div>
+      </div>
+
+      <div class="converter-card">
+        <form id="convert-form">
+          <div class="drop-zone" id="drop-zone" tabindex="0" role="button" aria-label="Choose a PDF file or drag and drop it here">
+            <input type="file" id="pdf-input" name="pdf" accept="application/pdf,.pdf" hidden>
+            <div class="upload-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M4 15.5v3A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5v-3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Drop your PDF here</h3>
+            <p>or <button class="browse-button" type="button" id="browse-button">browse files</button> from your device</p>
+            <div class="file-limit">PDF files only <span>•</span> Maximum 50 MB</div>
+          </div>
+
+          <div class="file-preview hidden" id="file-preview">
+            <div class="file-type">PDF</div>
+            <div class="file-details"><strong id="file-name">document.pdf</strong><span id="file-size">0 MB</span></div>
+            <button type="button" class="remove-file" id="remove-file" aria-label="Remove selected file">×</button>
+          </div>
+
+          <div class="settings">
+            <div class="settings-title"><span class="settings-icon">⚙</span><div><h3>Conversion settings</h3><p>Make the output work for you.</p></div></div>
+            <div class="settings-grid">
+              <label class="field">
+                <span>Pages to convert</span>
+                <select name="pages" id="pages-select">
+                  <option value="all">All pages</option>
+                  <option value="custom">Choose specific pages</option>
+                </select>
+                <input class="custom-pages hidden" id="custom-pages" type="text" placeholder="e.g. 1, 3, 5-8" autocomplete="off">
+                <small class="field-hint">Use commas or ranges, for example 1,3,5-8.</small>
+              </label>
+              <label class="field">
+                <span>Image resolution</span>
+                <select name="dpi" id="dpi-select">
+                  <option value="96">96 DPI · Small file</option>
+                  <option value="150" selected>150 DPI · Balanced</option>
+                  <option value="200">200 DPI · High quality</option>
+                  <option value="300">300 DPI · Print quality</option>
+                </select>
+                <small class="field-hint">Higher resolution creates larger images.</small>
+              </label>
+              <label class="field">
+                <span>JPG quality</span>
+                <select name="quality" id="quality-select">
+                  <option value="60">60% · Smaller</option>
+                  <option value="75">75% · Good</option>
+                  <option value="90" selected>90% · Recommended</option>
+                  <option value="100">100% · Maximum</option>
+                </select>
+                <small class="field-hint">Controls image compression.</small>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <div class="privacy-copy"><span>♧</span><p>Your file is processed for conversion only. We don't save uploaded PDFs.</p></div>
+            <button class="convert-button" id="convert-button" type="submit"><span>Convert to JPG</span><b>→</b></button>
+          </div>
+        </form>
+
+        <div class="progress-area hidden" id="progress-area">
+          <div class="spinner"></div><div><strong>Converting your PDF...</strong><p>This may take a few moments.</p></div>
+        </div>
+        <div class="status-message hidden" id="status-message" role="alert"></div>
+      </div>
+    </section>
+
+    <section class="steps-section" id="how-it-works">
+      <div class="center-heading"><span class="section-kicker">NO FUSS, JUST RESULTS</span><h2>Three steps. That's it.</h2><p>Get your images without the usual hassle.</p></div>
+      <div class="steps-grid">
+        <article class="step-card"><div class="step-number">01</div><div class="step-icon purple">↑</div><h3>Upload your PDF</h3><p>Choose a file from your device or simply drag it into the upload area.</p></article>
+        <article class="step-card"><div class="step-number">02</div><div class="step-icon blue">⚙</div><h3>Choose your settings</h3><p>Select the pages, resolution and image quality that suit your needs.</p></article>
+        <article class="step-card"><div class="step-number">03</div><div class="step-icon green">↓</div><h3>Download your JPGs</h3><p>Get every converted page together in one convenient ZIP file.</p></article>
+      </div>
+    </section>
+
+    <section class="features-section" id="features">
+      <div class="center-heading"><span class="section-kicker">MADE TO BE USEFUL</span><h2>A better way to convert</h2></div>
+      <div class="features-grid">
+        <div class="feature"><span>✦</span><div><h3>Sharp image quality</h3><p>Choose up to 300 DPI for clear, detailed output.</p></div></div>
+        <div class="feature"><span>▤</span><div><h3>Page selection</h3><p>Convert the whole document or only the pages you need.</p></div></div>
+        <div class="feature"><span>⌁</span><div><h3>Easy ZIP download</h3><p>Keep all your JPG pages neatly packed in one file.</p></div></div>
+        <div class="feature"><span>♡</span><div><h3>Simple and private</h3><p>No account required. Files are not stored by this app.</p></div></div>
+      </div>
+    </section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="/"><span class="brand-mark"><span></span><span></span><span></span><span></span></span><span>pixel<span class="brand-light">press</span></span></a><p>Simple tools for everyday files.</p><span>© 2026 PixelPress</span></footer>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
